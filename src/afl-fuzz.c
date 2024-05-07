@@ -606,10 +606,10 @@ u8 run_gen_seeds(afl_state_t * afl, u8 init_flag){
   char command[1000];
   if (init_flag == 1){
     printf("\n==== Gen start ====\n");
-    snprintf(command, sizeof(command), "python %s/program_gen.py --output %s --program %s --input %s --mode init >> %s/gen_log", afl->generator_base_path, afl->out_dir, afl->target_program, afl->in_dir, afl->out_dir);
+    snprintf(command, sizeof(command), "%s/program_gen_main --output %s --program %s --input %s --mode init >> %s/gen_log", afl->generator_base_path, afl->out_dir, afl->target_program, afl->in_dir, afl->out_dir);
   }else{
     printf("\n==== Gen-M start ====\n");
-    snprintf(command, sizeof(command), "python %s/generator_mutation_gpt_3_5.py --output %s >> %s/mutate_log", afl->generator_base_path, afl->out_dir, afl->out_dir);
+    snprintf(command, sizeof(command), "%s/generator_mutation_main --output %s >> %s/mutate_log", afl->generator_base_path, afl->out_dir, afl->out_dir);
   }
   
   int result = system(command);
